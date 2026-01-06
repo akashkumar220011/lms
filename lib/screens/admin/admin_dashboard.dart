@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:lms_app/screens/admin/view_courses.dart';
+import 'package:lms_app/screens/admin/view_teachers.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
+import '../auth/login.dart';
+import 'view_students.dart';
+
+class AdminDashboard extends StatelessWidget {
+  const AdminDashboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Admin Dashboard"),
+      actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              context.read<AuthProvider>().logout();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => LoginScreen()),
+                (_) => false,
+              );
+            },
+          ),
+        ],),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ViewStudentsScreen()),
+                );
+              },
+              child: Text("View Students"),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ViewTeachersScreen()),
+                );
+              },
+              child: Text("View Teachers"),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ViewCoursesScreen()),
+                );
+              },
+              child: Text("View Courses"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
