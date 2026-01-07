@@ -48,6 +48,16 @@ class AuthProvider extends ChangeNotifier {
     return false;
   }
 
+  Future<List<UserModel>> getTeachers() async{
+    final db = await DatabaseHelper.database;
+
+    final result = await db.query(
+      'users',
+      where: 'role = ?',
+      whereArgs: ['teacher'],
+    );
+  return result.map((e)=> UserModel.fromMap(e)).toList();
+  }
   void logout() {
     currentUser = null;
     notifyListeners();

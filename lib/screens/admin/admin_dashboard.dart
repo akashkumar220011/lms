@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lms_app/screens/admin/admin_create_course.dart';
 import 'package:lms_app/screens/admin/view_courses.dart';
 import 'package:lms_app/screens/admin/view_teachers.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +13,9 @@ class AdminDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Admin Dashboard"),
-      actions: [
+      appBar: AppBar(
+        title: Text("Admin Dashboard"),
+        actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
@@ -25,7 +27,8 @@ class AdminDashboard extends StatelessWidget {
               );
             },
           ),
-        ],),
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -58,6 +61,16 @@ class AdminDashboard extends StatelessWidget {
                 );
               },
               child: Text("View Courses"),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              child: Text("Create Course"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AdminCreateCourse()),
+                );
+              },
             ),
           ],
         ),
