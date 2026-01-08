@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/screens/admin/admin_create_course.dart';
+import 'package:lms_app/screens/admin/admin_create_user.dart';
+import 'package:lms_app/screens/admin/admin_manage_users.dart';
 import 'package:lms_app/screens/admin/view_courses.dart';
 import 'package:lms_app/screens/admin/view_teachers.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +73,40 @@ class AdminDashboard extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => AdminCreateCourse()),
                 );
               },
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AdminCreateUser()),
+                );
+              },
+              child: Text("Create User"),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AdminManageUsers(role: 'student'),
+                  ),
+                );
+              },
+              child: Text('Manage Student'),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AdminManageUsers(role: 'teacher'),
+                  ),
+                );
+              },
+              child: Text('Manage Teachers'),
             ),
           ],
         ),

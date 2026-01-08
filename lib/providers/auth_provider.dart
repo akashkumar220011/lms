@@ -48,7 +48,7 @@ class AuthProvider extends ChangeNotifier {
     return false;
   }
 
-  Future<List<UserModel>> getTeachers() async{
+  Future<List<UserModel>> getTeachers() async {
     final db = await DatabaseHelper.database;
 
     final result = await db.query(
@@ -56,10 +56,44 @@ class AuthProvider extends ChangeNotifier {
       where: 'role = ?',
       whereArgs: ['teacher'],
     );
-  return result.map((e)=> UserModel.fromMap(e)).toList();
+    return result.map((e) => UserModel.fromMap(e)).toList();
   }
+
   void logout() {
     currentUser = null;
     notifyListeners();
+  }
+
+  Future<void> createUser({
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+  }) async {
+    final db = await DatabaseHelper.database;
+
+    await db.insert('users', {
+      'name': name,
+      'email': email,
+      'password': password,
+      'role': role,
+    });
+  }
+
+  Future<List<UserModel>> getStudents() async {
+    final db = await DatabaseHelper.database;
+
+    final result = await db.query(
+      'users',
+      where: 'role = ?',
+      whereArgs: ['student'],
+    );
+    return result.map((e) => UserModel.fromMap(e)).toList();
+  }
+
+  Future<void> deleteUser(int userId) async {
+    final db = await DatabaseHelper.database;
+
+    await db.delete('users', where: 'id= ?', whereArgs: [userId]);
   }
 }
