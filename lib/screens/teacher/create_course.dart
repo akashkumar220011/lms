@@ -15,7 +15,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
   final titleCtrl = TextEditingController();
   final descCtrl = TextEditingController();
 
-  createCourse() async {
+ Future<void> createCourse() async {
     final auth = context.read<AuthProvider>();
     final courseProvider = context.read<CourseProvider>();
     final teacherId = auth.currentUser!.id!;
@@ -42,6 +42,11 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
           TextField(
             controller: titleCtrl,
             decoration: InputDecoration(labelText: "Course Title"),
+          ),
+          SizedBox(height: 20),
+          TextField(
+            controller: descCtrl,
+            decoration: InputDecoration(labelText: "Course Description"),
           ),
           SizedBox(height: 20),
           ElevatedButton(onPressed: createCourse, child: Text("Create"))

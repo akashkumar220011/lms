@@ -17,7 +17,7 @@ class _ViewTeachersScreenState extends State<ViewTeachersScreen> {
     fetchTeachers();
   }
 
-  fetchTeachers() async {
+  Future<void> fetchTeachers() async {
     final db = await DatabaseHelper.database;
     final res = await db.query(
       'users',
